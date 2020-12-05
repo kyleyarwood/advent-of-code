@@ -1,4 +1,5 @@
 from collections import defaultdict
+from file_lines import get_file_lines
 
 def product_of_sum_to(a, n):
     seen = set()
@@ -26,7 +27,7 @@ def get_input(filename):
         return list(map(int, f.readlines()))
 
 def main():
-    inp = get_input("day1.in")
+    inp = list(map(int, get_file_lines("day1.in")))
     N = 2020
     result = product_of_sum_to(inp, N)
     print(result)
