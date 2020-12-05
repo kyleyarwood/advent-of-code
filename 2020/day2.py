@@ -3,6 +3,14 @@ from collections import Counter
 def is_valid_password(pw):
     return pw['lo'] <= pw['pass'].count(pw['char']) <= pw['hi']
 
+def xor(a, b):
+    return (a or b) and not (a and b)
+
+def new_is_valid_password(pw):
+    first = pw['pass'][pw['lo']-1] == pw['char']
+    second = pw['pass'][pw['hi']-1] == pw['char']
+    return xor(first, second)
+
 def get_input(filename):
     with open(filename, 'r') as f:
         return f.readlines()
@@ -18,6 +26,10 @@ def main():
     inp = get_input("day2.in")
     inp = [parse_line(line) for line in inp]
     result = sum(is_valid_password(pw) for pw in inp)
+    print(result)
+
+    #part 2
+    result = sum(new_is_valid_password(pw) for pw in inp)
     print(result)
 
 if __name__ == "__main__":
