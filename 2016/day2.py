@@ -3,18 +3,20 @@ from file_lines import get_file_lines
 
 
 def get_bathroom_code(lines, start=5):
+	g = [[1,2,3],[4,5,6],[7,8,9]]
+	row, col = 1, 1
 	code = []
-	fns = {'U': lambda x: x-3, 'D': lambda x: x+3, 'L': lambda x: x-1, 'R': lambda x: x+1}
 	for line in lines:
 		for instr in line:
-			new_start = fns[instr](start)
-			if 1 <= new_start <= 9:
-				print(new_start)
-				start = new_start
+			if instr == 'U':
+				row = max(0, row-1)
+			elif instr == 'D':
+				row = min(2, row+1)
+			elif instr == 'L':
+				col = max(0, col-1)
 			else:
-				print('nothing')
-		print()
-		code.append(start)
+				col = min(2, col+1)
+		code.append(g[row][col])
 	return ''.join(map(str, code))
 
 
